@@ -1,0 +1,27 @@
+:root{
+  --headerHeight: 60px;
+  --footerHeight: 60px;
+}
+body{
+  overflow-y: hidden;
+}
+main {
+  margin-top: var(--generalHeight);
+  margin-bottom: var(--generalHeight);
+  height: calc(100vh - var(--generalHeight)*2);
+  overflow-y: auto;
+  width: 100%;
+}
+footer, header {
+  position: fixed;
+  left: 0;
+  width: 100%;
+}
+header {
+  height: var(--headerHeight);
+  top: 0;
+}
+footer {
+  height: var(--footerHeight);
+  bottom: 0;
+}
