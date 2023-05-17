@@ -1,6 +1,6 @@
 <?php
 namespace Modules;
-class ProductType{
+class Product{
   private int $id;
   private string $name;
   private string $description;
