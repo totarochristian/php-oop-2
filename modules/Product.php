@@ -127,4 +127,22 @@ class Product implements DatabaseMethodsInterface{
     $products[] = new Product(1,"Collare antiparassitario cani grandi","Questo collare innovativo offre una protezione completa contro pulci e zecche fino a 8 mesi con una sola applicazione. Durante questo lasso di tempo il collare rilascia in modo controllato e costante i principi attivi imidacloprid e flumetrina, fondamentali per proteggere e prevenire infestazioni parassitarie pericolose per la salute del tuo cane.",1,1,"https://arcaplanet.vtexassets.com/arquivos/ids/269684-1800-1800/seresto-antiparassitario-cane-grande.jpg?v=1770717675&quality=1&width=1800&height=1800",55.9,4.7,"Seresto");
     return $products;
   }
+
+  /**
+   * Method used to print the product card with the data saved in the current instance of Product
+   *
+   * @return void
+   */
+  public function printCard(){
+    echo '<div class="card" style="width: 18rem;">
+          <img src="'.$this->image.'" class="card-img-top" alt="'.$this->name.'">
+          <div class="card-body">
+            <h5 class="card-title">'.$this->name.'</h5>
+            <p class="card-text">'.$this->description.'</p>
+            <p class="card-text">'.$this->brand.'</p>
+            <p class="card-text">'.$this->vote.'</p>
+            <p class="card-text">'.$this->price.'</p>
+          </div>
+        </div>';
+  }
 }
