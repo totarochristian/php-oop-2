@@ -1,5 +1,10 @@
 <?php
   include __DIR__."/partials/server/settings.php";
+  include __DIR__."/modules/DatabaseMethodsInterface.php";
+  include __DIR__."/modules//BaseCategoryType.php";
+  include __DIR__."/modules/Category.php";
+  include __DIR__."/modules/ProductType.php";
+  include __DIR__."/modules/Product.php";
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -16,7 +21,7 @@
     <?php include __DIR__."/partials/template/navbar.php"; ?>
   </header>
   <main>
-    
+  <?php include __DIR__."/partials/template/productsCards.php"; ?>
   </main>
   <footer class="bg-dark text-white">
     <?php include __DIR__."/partials/template/footer.php"; ?>

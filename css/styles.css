@@ -6,9 +6,9 @@ body{
   overflow-y: hidden;
 }
 main {
-  margin-top: var(--generalHeight);
-  margin-bottom: var(--generalHeight);
-  height: calc(100vh - var(--generalHeight)*2);
+  margin-top: var(--headerHeight);
+  margin-bottom: var(--footerHeight);
+  height: calc(100vh - var(--headerHeight) - var(--footerHeight));
   overflow-y: auto;
   width: 100%;
 }
@@ -20,6 +20,7 @@ footer, header {
 header {
   height: var(--headerHeight);
   top: 0;
+  z-index: 1000;
 }
 footer {
   height: var(--footerHeight);
