@@ -3,7 +3,7 @@ namespace Modules;
 /**
  * Class used to manage the products
  */
-class Product{
+class Product implements DatabaseMethodsInterface{
   /**
    * Id of the product in the database 
    *
@@ -90,5 +90,13 @@ class Product{
     $this->price = $price;
     $this->vote = $vote;
     $this->brand = $brand;
+  }
+
+  public static function fetchAllFromDatabase(){
+    
+  }
+
+  public static function fetchAllDefault(){
+    
   }
 }
