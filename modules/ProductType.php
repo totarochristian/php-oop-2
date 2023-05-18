@@ -13,4 +13,42 @@ class ProductType extends BaseCategoryType{
   public function __construct(int $id=-1,string $name=""){
     parent::__construct($id,$name);
   }
+
+  /**
+   * Method used to fetch all the product types in the database if correctly connected or the default product types
+   *
+   * @param mysqli $conn Connection with the mysql database
+   * @return array Array of ProductType objects
+   */
+  public static function fetchAllFromDatabase($conn){
+    $productTypes = [];
+    if($conn){
+      $sql = "SELECT * FROM product_types";
+      $result = $conn->query($sql);
+      if($result && $result->num_rows > 0){
+        while($row = $result->fetch_object()){
+          $productTypes[] = new ProductType($row->id,$row->name);
+        }
+      }elseif($result){
+        echo "[ProductType.fetchAllFromDatabase] Nessun tipo prodotto trovato";
+      }else{
+        echo "[ProductType.fetchAllFromDatabase] Query error!";
+      }
+    }else
+    $productTypes = Category::fetchAllDefault();
+    return $productTypes;
+  }
+
+  /**
+   * Method used to return an array of default product types
+   *
+   * @return array Array of ProductType objects
+   */
+  public static function fetchAllDefault(){
+    $productTypes = [];
+    $productTypes[] = new ProductType(1,"Accessori");
+    $productTypes[] = new ProductType(2,"Alimentazione");
+    $productTypes[] = new ProductType(2,"Medicali e curativi");
+    return $productTypes;
+  }
 }
