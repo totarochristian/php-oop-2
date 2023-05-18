@@ -112,6 +112,7 @@ class Product implements DatabaseMethodsInterface{
     $filterCategory = isset($_GET['category']) ? $_GET['category'] : -1;
     $textToSearch = isset($_POST['textToSearch']) ? $_POST['textToSearch'] : null;
     $filterProductType = isset($_POST['productType']) ? (int)$_POST['productType'] : -1;
+    $orderType = isset($_POST['orderType']) ? (int)$_POST['orderType'] : -1;
     if($conn){
       $sql = "SELECT * FROM products";
       //Manage filters
@@ -125,6 +126,18 @@ class Product implements DatabaseMethodsInterface{
           $sql = $sql.($filterCategory>0 || $filterProductType>0 ? ' AND name LIKE "%'.$textToSearch.'%"' : ' name LIKE "%'.$textToSearch.'%"');
         }
       }
+      if($orderType>=0){
+        $sql = $sql." ORDER BY ";
+        switch($orderType){
+          case 0: $sql = $sql."price ASC"; break;
+          case 1: $sql = $sql."price DESC"; break;
+          case 2: $sql = $sql."vote ASC"; break;
+          case 3: $sql = $sql."vote DESC"; break;
+          case 4: $sql = $sql."weight ASC"; break;
+          case 5: $sql = $sql."weight DESC"; break;
+        }
+      }
+      //Start operations to get data from the database and save as array
       $result = $conn->query($sql);
       if($result && $result->num_rows > 0){
         while($row = $result->fetch_object()){
