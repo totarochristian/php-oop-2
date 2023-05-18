@@ -1,4 +1,4 @@
-# Boolean - proj-html-vuejs
+# Boolean - php-oop-2
 
 This is a solution to the php-oop-2 challenge of [Boolean](https://boolean.careers/). Boolean help you improve your coding skills by building realistic projects with an increasingly high level of difficulty. 
 
