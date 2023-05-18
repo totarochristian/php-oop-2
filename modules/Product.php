@@ -170,12 +170,18 @@ class Product implements DatabaseMethodsInterface{
    * @return void
    */
   public function printCard(){
+    $stars = '';
+    for($i=0;$i<5;$i++){
+      $stars .= $i<ceil($this->vote) ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star"></i>';
+    }
+      
+
     echo '<div class="card" style="width: 18rem;">
           <img src="'.$this->image.'" class="card-img-top" alt="'.$this->name.'">
           <div class="card-body">
             <p class="invert2 card-text text-uppercase text-secondary">'.$this->brand.'</p>
             <h5 class="invert2 card-title">'.$this->name.'</h5>
-            <p class="invert2 card-text">'.$this->vote.'</p>
+            <p class="invert2 card-text text-warning">'.$stars.'</p>
             <p class="invert1 card-text">'.$this->description.'</p>
             <p class="invert2 card-text text-danger fw-bold fs-5"><span class="fs-p text-dark fw-normal">Prezzo: </span>'.$this->price.' &euro;</p>
             <p class="invert2 card-text">Peso prodotto: '.$this->getWeight().' gr</p>
