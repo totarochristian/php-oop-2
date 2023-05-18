@@ -29,10 +29,20 @@ class BaseCategoryType {
     $this->name = $name;
   }
 
+  /**
+   * Method used to get the Id of the object
+   *
+   * @return int Id of the object
+   */
   public function GetId(){
     return $this->id;
   }
 
+  /**
+   * Method used to get the name of the object
+   *
+   * @return string Name of the object
+   */
   public function GetName(){
     return $this->name;
   }
