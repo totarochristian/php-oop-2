@@ -1,9 +1,7 @@
 <div class="d-flex justify-content-center align-items-center gap-4 p-4 flex-wrap">
   <?php
+    use Modules\Product;
     //Gets movies array from the database
-
-use Modules\Product;
-
     $arrayOfProducts = Product::fetchAllFromDatabase($conn);
     //Print the title before the print of cards movies (or an error)
     if(!$conn){

@@ -100,8 +100,11 @@ class Product implements DatabaseMethodsInterface{
    */
   public static function fetchAllFromDatabase($conn){
     $products = [];
+    $filterCategory = isset($_GET['category']) ? $_GET['category'] : -1;
     if($conn){
       $sql = "SELECT * FROM products";
+      if($filterCategory>0)
+        $sql = $sql." WHERE category_id = $filterCategory";
       $result = $conn->query($sql);
       if($result && $result->num_rows > 0){
         while($row = $result->fetch_object()){
