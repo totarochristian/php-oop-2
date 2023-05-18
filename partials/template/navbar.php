@@ -16,8 +16,14 @@
         </li>
         <?php } ?>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="d-flex" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+        <input name="textToSearch" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <select name="productType" class="form-select" aria-label="Product type select">
+          <?php use Modules\ProductType;
+          foreach(ProductType::fetchAllFromDatabase($conn) as $prod) {?>
+          <option value="<?php echo $prod->GetId() ?>"><?php echo $prod->GetName() ?></option>
+          <?php } ?>
+        </select>
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
