@@ -1,10 +1,10 @@
 <?php
-  include __DIR__."/partials/server/settings.php";
-  include __DIR__."/modules/DatabaseMethodsInterface.php";
-  include __DIR__."/modules//BaseCategoryType.php";
-  include __DIR__."/modules/Category.php";
-  include __DIR__."/modules/ProductType.php";
-  include __DIR__."/modules/Product.php";
+  include_once __DIR__."/partials/server/settings.php";
+  include_once __DIR__."/modules/DatabaseMethodsInterface.php";
+  include_once __DIR__."/modules//BaseCategoryType.php";
+  include_once __DIR__."/modules/Category.php";
+  include_once __DIR__."/modules/ProductType.php";
+  include_once __DIR__."/modules/Product.php";
 ?>
 <!DOCTYPE html>
 <html lang="it">
