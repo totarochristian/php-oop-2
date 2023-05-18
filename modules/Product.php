@@ -173,12 +173,12 @@ class Product implements DatabaseMethodsInterface{
     echo '<div class="card" style="width: 18rem;">
           <img src="'.$this->image.'" class="card-img-top" alt="'.$this->name.'">
           <div class="card-body">
-            <h5 class="card-title">'.$this->name.'</h5>
-            <p class="card-text">'.$this->description.'</p>
-            <p class="card-text">'.$this->brand.'</p>
-            <p class="card-text">'.$this->vote.'</p>
-            <p class="card-text">'.$this->price.'</p>
-            <p class="card-text">'.$this->getWeight().' gr</p>
+            <p class="invert2 card-text text-uppercase text-secondary">'.$this->brand.'</p>
+            <h5 class="invert2 card-title">'.$this->name.'</h5>
+            <p class="invert2 card-text">'.$this->vote.'</p>
+            <p class="invert1 card-text">'.$this->description.'</p>
+            <p class="invert2 card-text text-danger fw-bold fs-5"><span class="fs-p text-dark fw-normal">Prezzo: </span>'.$this->price.' &euro;</p>
+            <p class="invert2 card-text">Peso prodotto: '.$this->getWeight().' gr</p>
           </div>
         </div>';
   }

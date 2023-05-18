@@ -26,3 +26,26 @@ footer {
   height: var(--footerHeight);
   bottom: 0;
 }
+
+/* CARDS STYLE */
+.card{
+  height: 526px;
+  overflow-y: hidden;
+  cursor: pointer;
+}
+.card p{
+  max-height: 200px;
+  overflow-y: auto;
+}
+.card .invert1{
+  display: none;
+}
+.card:hover .invert1{
+  display: block;
+}
+.card .invert2{
+  display: block;
+}
+.card:hover .invert2{
+  display: none;
+}
