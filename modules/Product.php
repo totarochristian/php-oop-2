@@ -100,20 +100,32 @@ class Product implements DatabaseMethodsInterface{
    */
   public static function fetchAllFromDatabase($conn){
     $products = [];
+    //Get filters values
     $filterCategory = isset($_GET['category']) ? $_GET['category'] : -1;
+    $textToSearch = isset($_POST['textToSearch']) ? $_POST['textToSearch'] : null;
+    $filterProductType = isset($_POST['productType']) ? (int)$_POST['productType'] : -1;
     if($conn){
       $sql = "SELECT * FROM products";
-      if($filterCategory>0)
-        $sql = $sql." WHERE category_id = $filterCategory";
+      //Manage filters
+      if($filterCategory>0 || $textToSearch || $filterProductType>0){
+        $sql = $sql." WHERE ";
+        if($filterCategory>0)
+          $sql = $sql."category_id = $filterCategory";
+        if($filterProductType>0)
+          $sql = $sql.($filterCategory>0 ? " AND product_type_id = $filterProductType" : " product_type_id = $filterProductType");
+        if($textToSearch){
+          $sql = $sql.($filterCategory>0 || $filterProductType>0 ? ' AND name LIKE "%'.$textToSearch.'%"' : ' name LIKE "%'.$textToSearch.'%"');
+        }
+      }
       $result = $conn->query($sql);
       if($result && $result->num_rows > 0){
         while($row = $result->fetch_object()){
           $products[] = new Product($row->id,$row->name,$row->description,$row->category_id,$row->product_type_id,$row->image,$row->price,$row->vote,$row->brand);
         }
       }elseif($result){
-        echo "[Product.fetchAllFromDatabase] Nessun prodotto trovato";
+        echo "<script>console.log(".json_encode("[Product.fetchAllFromDatabase] Nessun prodotto trovato").");</script>";
       }else{
-        echo "[Product.fetchAllFromDatabase] Query error!";
+        echo "<script>console.log(".json_encode("[Product.fetchAllFromDatabase] Query error!").");</script>";
       }
     }else
       $products = Product::fetchAllDefault();

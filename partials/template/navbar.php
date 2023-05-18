@@ -16,12 +16,13 @@
         </li>
         <?php } ?>
       </ul>
-      <form class="d-flex" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-        <input name="textToSearch" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="d-flex" action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">
+        <input name="textToSearch" class="form-control me-2" type="search" placeholder="Nome o descrizione" aria-label="Search" value="<?php echo isset($_POST['textToSearch']) ? $_POST['textToSearch'] : "" ?>">
         <select name="productType" class="form-select" aria-label="Product type select">
+          <option value="-1" <?php echo isset($_POST['productType']) && $_POST['productType'] == -1 ? "selected" : "" ?>>Seleziona tipo prodotto</option>
           <?php use Modules\ProductType;
           foreach(ProductType::fetchAllFromDatabase($conn) as $prod) {?>
-          <option value="<?php echo $prod->GetId() ?>"><?php echo $prod->GetName() ?></option>
+          <option value="<?php echo $prod->GetId() ?>" <?php echo isset($_POST['productType']) && $_POST['productType'] == $prod->GetId() ? "selected" : "" ?>><?php echo $prod->GetName() ?></option>
           <?php } ?>
         </select>
         <button class="btn btn-outline-success" type="submit">Search</button>
