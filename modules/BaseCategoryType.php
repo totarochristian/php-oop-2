@@ -3,7 +3,7 @@ namespace Modules;
 /**
  * Base class for Category and ProductType module
  */
-class BaseCategoryType{
+class BaseCategoryType {
   /**
    * Id of the object in the database
    *
@@ -27,5 +27,13 @@ class BaseCategoryType{
   public function __construct(int $id=-1,string $name=""){
     $this->id = $id;
     $this->name = $name;
+  }
+
+  public function GetId(){
+    return $this->id;
+  }
+
+  public function GetName(){
+    return $this->name;
   }
 }

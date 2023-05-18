@@ -7,11 +7,12 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="<?php echo $_SERVER['PHP_SELF'] ?>">Home</a>
         </li>
-        <?php foreach(Category::fetchAllFromDatabase() as $cat) {?>
+        <?php use Modules\Category;
+        foreach(Category::fetchAllFromDatabase($conn) as $cat) {?>
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo $_SERVER['PHP_SELF'].'?category='.$cat->id ?>"><?php echo $cat->name ?></a>
+          <a class="nav-link" href="<?php echo $_SERVER['PHP_SELF'].'?category='.$cat->GetId() ?>"><?php echo $cat->GetName() ?></a>
         </li>
         <?php } ?>
       </ul>
