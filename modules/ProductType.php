@@ -30,9 +30,9 @@ class ProductType extends BaseCategoryType{
           $productTypes[] = new ProductType($row->id,$row->name);
         }
       }elseif($result){
-        echo "[ProductType.fetchAllFromDatabase] Nessun tipo prodotto trovato";
+        echo "<script>console.log(".json_encode("[ProductType.fetchAllFromDatabase] Nessun tipo prodotto trovato").");</script>";
       }else{
-        echo "[ProductType.fetchAllFromDatabase] Query error!";
+        echo "<script>console.log(".json_encode("[ProductType.fetchAllFromDatabase] Query error!").");</script>";
       }
     }else
     $productTypes = Category::fetchAllDefault();

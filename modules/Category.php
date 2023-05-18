@@ -30,9 +30,9 @@ class Category extends BaseCategoryType implements DatabaseMethodsInterface {
           $categories[] = new Category($row->id,$row->name);
         }
       }elseif($result){
-        echo "[Category.fetchAllFromDatabase] Nessuna categoria trovata";
+        echo "<script>console.log(".json_encode("[Category.fetchAllFromDatabase] Nessuna categoria trovata").");</script>";
       }else{
-        echo "[Category.fetchAllFromDatabase] Query error!";
+        echo "<script>console.log(".json_encode("[Category.fetchAllFromDatabase] Query error!").");</script>";
       }
     }else
       $categories = Category::fetchAllDefault();
