@@ -1,9 +1,16 @@
 <?php
 namespace Modules;
+include_once "./traits/Weightable.php";
 /**
  * Class used to manage the products
  */
 class Product implements DatabaseMethodsInterface{
+
+  /**
+   * Add weight to the product object
+   */
+  use weightable;
+
   /**
    * Id of the product in the database 
    *
@@ -80,7 +87,7 @@ class Product implements DatabaseMethodsInterface{
    * @param integer $vote Vote of the product in the database 
    * @param string $brand Brand of the product in the database 
    */
-  public function __construct(int $id=-1, string $name="", string $description="", int $categoryId=-1, int $productTypeId=-1, $image="", float $price=0, float $vote=0, string $brand=""){
+  public function __construct(int $id=-1, string $name="", string $description="", int $categoryId=-1, int $productTypeId=-1, $image="", float $price=0, float $vote=0, string $brand="", float $weight){
     $this->id = $id;
     $this->name = $name;
     $this->description = $description;
@@ -90,6 +97,7 @@ class Product implements DatabaseMethodsInterface{
     $this->price = $price;
     $this->vote = $vote;
     $this->brand = $brand;
+    $this->setWeigth($weight);
   }
 
   /**
@@ -120,7 +128,7 @@ class Product implements DatabaseMethodsInterface{
       $result = $conn->query($sql);
       if($result && $result->num_rows > 0){
         while($row = $result->fetch_object()){
-          $products[] = new Product($row->id,$row->name,$row->description,$row->category_id,$row->product_type_id,$row->image,$row->price,$row->vote,$row->brand);
+          $products[] = new Product($row->id,$row->name,$row->description,$row->category_id,$row->product_type_id,$row->image,$row->price,$row->vote,$row->brand,$row->weight);
         }
       }elseif($result){
         echo "<script>console.log(".json_encode("[Product.fetchAllFromDatabase] Nessun prodotto trovato").");</script>";
@@ -139,7 +147,7 @@ class Product implements DatabaseMethodsInterface{
    */
   public static function fetchAllDefault(){
     $products = [];
-    $products[] = new Product(1,"Collare antiparassitario cani grandi","Questo collare innovativo offre una protezione completa contro pulci e zecche fino a 8 mesi con una sola applicazione. Durante questo lasso di tempo il collare rilascia in modo controllato e costante i principi attivi imidacloprid e flumetrina, fondamentali per proteggere e prevenire infestazioni parassitarie pericolose per la salute del tuo cane.",1,1,"https://arcaplanet.vtexassets.com/arquivos/ids/269684-1800-1800/seresto-antiparassitario-cane-grande.jpg?v=1770717675&quality=1&width=1800&height=1800",55.9,4.7,"Seresto");
+    $products[] = new Product(1,"Collare antiparassitario cani grandi","Questo collare innovativo offre una protezione completa contro pulci e zecche fino a 8 mesi con una sola applicazione. Durante questo lasso di tempo il collare rilascia in modo controllato e costante i principi attivi imidacloprid e flumetrina, fondamentali per proteggere e prevenire infestazioni parassitarie pericolose per la salute del tuo cane.",1,1,"https://arcaplanet.vtexassets.com/arquivos/ids/269684-1800-1800/seresto-antiparassitario-cane-grande.jpg?v=1770717675&quality=1&width=1800&height=1800",55.9,4.7,"Seresto",300);
     return $products;
   }
 
@@ -157,6 +165,7 @@ class Product implements DatabaseMethodsInterface{
             <p class="card-text">'.$this->brand.'</p>
             <p class="card-text">'.$this->vote.'</p>
             <p class="card-text">'.$this->price.'</p>
+            <p class="card-text">'.$this->getWeight().' gr</p>
           </div>
         </div>';
   }
